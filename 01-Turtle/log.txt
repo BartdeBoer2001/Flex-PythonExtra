@@ -1,0 +1,654 @@
+PS C:\Users\bartd\Documents\Flex-PythonExtra\01-Turtle> py
+Python 3.8.5 (tags/v3.8.5:580fbb0, Jul 20 2020, 15:43:08) [MSC v.1926 32 bit (Intel)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import turtle
+>>> help(turtle)
+Help on module turtle:
+
+NAME
+    turtle
+
+MODULE REFERENCE
+    https://docs.python.org/3.8/library/turtle
+
+    The following documentation is automatically generated from the Python
+    source files.  It may be incomplete, incorrect or include features that
+    are considered implementation detail and may vary between Python
+    implementations.  When in doubt, consult the module reference at the
+    location listed above.
+
+DESCRIPTION
+    Turtle graphics is a popular way for introducing programming to
+    kids. It was part of the original Logo programming language developed
+    by Wally Feurzig and Seymour Papert in 1966.
+
+    Imagine a robotic turtle starting at (0, 0) in the x-y plane. After an ``import turtle``, give it
+    the command turtle.forward(15), and it moves (on-screen!) 15 pixels in
+    the direction it is facing, drawing a line as it moves. Give it the
+    command turtle.right(25), and it rotates in-place 25 degrees clockwise.
+
+    By combining together these and similar commands, intricate shapes and
+    pictures can easily be drawn.
+
+    ----- turtle.py
+
+    This module is an extended reimplementation of turtle.py from the
+    Python standard distribution up to Python 2.5. (See: http://www.python.org)
+
+    It tries to keep the merits of turtle.py and to be (nearly) 100%
+    compatible with it. This means in the first place to enable the
+    learning programmer to use all the commands, classes and methods
+    interactively when using the module from within IDLE run with
+    the -n switch.
+
+    Roughly it has the following features added:
+
+    - Better animation of the turtle movements, especially of turning the
+      turtle. So the turtles can more easily be used as a visual feedback
+      instrument by the (beginning) programmer.
+
+    - Different turtle shapes, gif-images as turtle shapes, user defined
+      and user controllable turtle shapes, among them compound
+      (multicolored) shapes. Turtle shapes can be stretched and tilted, which
+      makes turtles very versatile geometrical objects.
+
+    - Fine control over turtle movement and screen updates via delay(),
+      and enhanced tracer() and speed() methods.
+
+    - Aliases for the most commonly used commands, like fd for forward etc.,
+      following the early Logo traditions. This reduces the boring work of
+      typing long sequences of commands, which often occur in a natural way
+      when kids try to program fancy pictures on their first encounter with
+      turtle graphics.
+
+    - Turtles now have an undo()-method with configurable undo-buffer.
+
+    - Some simple commands/methods for creating event driven programs
+      (mouse-, key-, timer-events). Especially useful for programming games.
+
+    - A scrollable Canvas class. The default scrollable Canvas can be
+      extended interactively as needed while playing around with the turtle(s).
+
+    - A TurtleScreen class with methods controlling background color or
+      background image, window and canvas size and other properties of the
+      TurtleScreen.
+
+    - There is a method, setworldcoordinates(), to install a user defined
+      coordinate-system for the TurtleScreen.
+
+    - The implementation uses a 2-vector class named Vec2D, derived from tuple.
+      This class is public, so it can be imported by the application programmer,
+      which makes certain types of computations very natural and compact.
+
+    - Appearance of the TurtleScreen and the Turtles at startup/import can be
+      configured by means of a turtle.cfg configuration file.
+      The default configuration mimics the appearance of the old turtle module.
+
+    - If configured appropriately the module reads in docstrings from a docstring
+      dictionary in some different language, supplied separately  and replaces
+      the English ones by those read in. There is a utility function
+      write_docstringdict() to write a dictionary with the original (English)
+      docstrings to disc, so it can serve as a template for translations.
+
+    Behind the scenes there are some features included with possible
+    extensions in mind. These will be commented and documented elsewhere.
+
+CLASSES
+    builtins.Exception(builtins.BaseException)
+        Terminator
+    builtins.object
+        Shape
+    builtins.tuple(builtins.object)
+        Vec2D
+    tkinter.Frame(tkinter.Widget)
+        ScrolledCanvas
+    TNavigator(builtins.object)
+        RawTurtle(TPen, TNavigator)
+            Turtle
+    TPen(builtins.object)
+        RawTurtle(TPen, TNavigator)
+            Turtle
+    TurtleScreenBase(builtins.object)
+        TurtleScreen
+
+    Pen = class Turtle(RawTurtle)
+     |  Pen(shape='classic', undobuffersize=1000, visible=True)
+     |
+     |  RawTurtle auto-creating (scrolled) canvas.
+     |
+     |  When a Turtle object is created or a function derived from some
+     |  Turtle method is called a TurtleScreen object is automatically created.
+     |
+     |  Method resolution order:
+     |      Turtle
+     |      RawTurtle
+     |      TPen
+     |      TNavigator
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, shape='classic', undobuffersize=1000, visible=True)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from RawTurtle:
+     |
+     |  begin_fill(self)
+     |      Called just before drawing a shape to be filled.
+     |
+     |      No argument.
+     |
+     |      Example (for a Turtle instance named turtle):
+     |      >>> turtle.color("black", "red")
+     |      >>> turtle.begin_fill()
+     |      >>> turtle.circle(60)
+     |      >>> turtle.end_fill()
+     |
+     |  begin_poly(self)
+     |      Start recording the vertices of a polygon.
+     |
+     |      No argument.
+     |
+     |      Start recording the vertices of a polygon. Current turtle position
+     |      is first point of polygon.
+     |
+     |      Example (for a Turtle instance named turtle):
+     |      >>> turtle.begin_poly()
+     |
+     |  clear(self)
+     |      Delete the turtle's drawings from the screen. Do not move turtle.
+     |
+     |      No arguments.
+     |
+     |      Delete the turtle's drawings from the screen. Do not move turtle.
+     |      State and position of the turtle as well as drawings of other
+     |      turtles are not affected.
+     |
+     |      Examples (for a Turtle instance named turtle):
+     |      >>> turtle.clear()
+     |
+     |  clearstamp(self, stampid)
+     |      Delete stamp with given stampid
+     |
+     |      Argument:
+     |      stampid - an integer, must be return value of previous stamp() call.
+     |
+     |      Example (for a Turtle instance named turtle):
+     |      >>> turtle.color("blue")
+     |      >>> astamp = turtle.stamp()
+     |      >>> turtle.fd(50)
+     |      >>> turtle.clearstamp(astamp)
+     |
+     |  clearstamps(self, n=None)
+     |      Delete all or first/last n of turtle's stamps.
+     |
+     |      Optional argument:
+     |      n -- an integer
+     |
+     |      If n is None, delete all of pen's stamps,
+     |      else if n > 0 delete first n stamps
+     |      else if n < 0 delete last n stamps.
+     |
+     |      Example (for a Turtle instance named turtle):
+     |      >>> for i in range(8):
+     |      ...     turtle.stamp(); turtle.fd(30)
+     |      ...
+     |      >>> turtle.clearstamps(2)
+     |      >>> turtle.clearstamps(-2)
+     |      >>> turtle.clearstamps()
+     |
+     |  clone(self)
+     |      Create and return a clone of the turtle.
+     |
+     |      No argument.
+     |
+     |      Create and return a clone of the turtle with same position, heading
+     |      and turtle properties.
+     |
+     |      Example (for a Turtle instance named mick):
+     |      mick = Turtle()
+     |      joe = mick.clone()
+     |
+     |  dot(self, size=None, *color)
+     |      Draw a dot with diameter size, using color.
+     |
+     |      Optional arguments:
+     |      size -- an integer >= 1 (if given)
+     |      color -- a colorstring or a numeric color tuple
+     |
+     |      Draw a circular dot with diameter size, using color.
+     |      If size is not given, the maximum of pensize+4 and 2*pensize is used.
+     |
+     |      Example (for a Turtle instance named turtle):
+     |      >>> turtle.dot()
+     |      >>> turtle.fd(50); turtle.dot(20, "blue"); turtle.fd(50)
+     |
+     |  end_fill(self)
+     |      Fill the shape drawn after the call begin_fill().
+     |
+     |      No argument.
+     |
+     |      Example (for a Turtle instance named turtle):
+     |      >>> turtle.color("black", "red")
+     |      >>> turtle.begin_fill()
+     |      >>> turtle.circle(60)
+     |      >>> turtle.end_fill()
+     |
+     |  end_poly(self)
+     |      Stop recording the vertices of a polygon.
+     |
+     |      No argument.
+     |
+     |      Stop recording the vertices of a polygon. Current turtle position is
+     |      last point of polygon. This will be connected with the first point.
+     |
+     |      Example (for a Turtle instance named turtle):
+     |      >>> turtle.end_poly()
+     |
+     |  filling(self)
+     |      Return fillstate (True if filling, False else).
+     |
+     |      No argument.
+     |
+     |      Example (for a Turtle instance named turtle):
+     |      >>> turtle.begin_fill()
+     |      >>> if turtle.filling():
+     |      ...     turtle.pensize(5)
+     |      ... else:
+     |      ...     turtle.pensize(3)
+     |
+     |  get_poly(self)
+     |      Return the lastly recorded polygon.
+     |
+     |      No argument.
+     |
+     |      Example (for a Turtle instance named turtle):
+     |      >>> p = turtle.get_poly()
+     |      >>> turtle.register_shape("myFavouriteShape", p)
+     |
+     |  get_shapepoly(self)
+     |      Return the current shape polygon as tuple of coordinate pairs.
+     |
+     |      No argument.
+     |
+     |      Examples (for a Turtle instance named turtle):
+     |      >>> turtle.shape("square")
+     |      >>> turtle.shapetransform(4, -1, 0, 2)
+     |      >>> turtle.get_shapepoly()
+     |      ((50, -20), (30, 20), (-50, 20), (-30, -20))
+     |
+     |  getpen = getturtle(self)
+     |
+     |  getscreen(self)
+     |      Return the TurtleScreen object, the turtle is drawing  on.
+     |
+     |      No argument.
+     |
+     |      Return the TurtleScreen object, the turtle is drawing  on.
+     |      So TurtleScreen-methods can be called for that object.
+     |
+     |      Example (for a Turtle instance named turtle):
+     |      >>> ts = turtle.getscreen()
+     |      >>> ts
+     |      <turtle.TurtleScreen object at 0x0106B770>
+     |      >>> ts.bgcolor("pink")
+     |
+     |  getturtle(self)
+     |      Return the Turtleobject itself.
+     |
+     |      No argument.
+     |
+     |      Only reasonable use: as a function to return the 'anonymous turtle':
+     |
+     |      Example:
+     |      >>> pet = getturtle()
+     |      >>> pet.fd(50)
+     |      >>> pet
+     |      <turtle.Turtle object at 0x0187D810>
+     |      >>> turtles()
+     |      [<turtle.Turtle object at 0x0187D810>]
+     |
+     |  onclick(self, fun, btn=1, add=None)
+     |      Bind fun to mouse-click event on this turtle on canvas.
+     |
+     |      Arguments:
+     |      fun --  a function with two arguments, to which will be assigned
+     |              the coordinates of the clicked point on the canvas.
+     |      btn --  number of the mouse-button defaults to 1 (left mouse button).
+     |      add --  True or False. If True, new binding will be added, otherwise
+     |              it will replace a former binding.
+     |
+     |      Example for the anonymous turtle, i. e. the procedural way:
+     |
+     |      >>> def turn(x, y):
+     |      ...     left(360)
+     |      ...
+     |      >>> onclick(turn)  # Now clicking into the turtle will turn it.
+     |      >>> onclick(None)  # event-binding will be removed
+
+>>> dir(turtle
+... dir(turtle)
+  File "<stdin>", line 2
+    dir(turtle)
+    ^
+SyntaxError: invalid syntax
+>>> dir(turtle)
+['Canvas', 'Pen', 'RawPen', 'RawTurtle', 'Screen', 'ScrolledCanvas', 'Shape', 'TK', 'TNavigator', 'TPen', 'Tbuffer', 'Terminator', 'Turtle', 'TurtleGraphicsError', 'TurtleScreen', 'TurtleScreenBase', 'Vec2D', '_CFG', '_LANGUAGE', '_Root', '_Screen', '_TurtleImage', '__all__', '__builtins__', '__cached__', '__doc__', '__file__', '__forwardmethods', '__func_body', '__loader__', '__methodDict', '__methods', '__name__', '__package__', '__spec__', '__stringBody', '_alias_list', '_make_global_funcs', '_screen_docrevise', '_tg_classes', '_tg_screen_functions', '_tg_turtle_functions', '_tg_utilities', '_turtle_docrevise', '_ver', 'addshape', 'back', 'backward', 'begin_fill', 'begin_poly', 'bgcolor', 'bgpic', 'bk', 'bye', 'circle', 'clear', 'clearscreen', 'clearstamp', 'clearstamps', 'clone', 'color', 'colormode', 'config_dict', 'deepcopy', 'degrees', 'delay', 'distance', 'done', 'dot', 'down', 'end_fill', 'end_poly', 'exitonclick', 'fd', 'fillcolor', 'filling', 'forward', 'get_poly', 'get_shapepoly', 'getcanvas', 'getmethparlist', 'getpen', 'getscreen', 'getshapes', 'getturtle', 'goto', 'heading', 'hideturtle', 'home', 'ht', 'inspect', 'isdown', 'isfile', 'isvisible', 'join', 'left', 'listen', 'lt', 'mainloop', 'math', 'mode', 'numinput', 'onclick', 'ondrag', 'onkey', 'onkeypress', 'onkeyrelease', 'onrelease', 'onscreenclick', 'ontimer', 'pd', 'pen', 'pencolor', 'pendown', 'pensize', 'penup', 'pos', 'position', 'pu', 'radians', 'read_docstrings', 'readconfig', 'register_shape', 'reset', 'resetscreen', 'resizemode', 'right', 'rt', 'screensize', 'seth', 'setheading', 'setpos', 'setposition', 'settiltangle', 'setundobuffer', 'setup', 'setworldcoordinates', 'setx', 'sety', 'shape', 'shapesize', 'shapetransform', 'shearfactor', 'showturtle', 'simpledialog', 'speed', 'split', 'st', 'stamp', 'sys', 'textinput', 'tilt', 'tiltangle', 'time', 'title', 'towards', 'tracer', 'turtles', 'turtlesize', 'types', 'undo', 'undobufferentries', 'up', 'update', 'width', 'window_height', 'window_width', 'write', 'write_docstringdict', 'xcor', 'ycor']
+>>> help(turtle.setup)
+Help on function setup in module turtle:
+
+setup(width=0.5, height=0.75, startx=None, starty=None)
+    Set the size and position of the main window.
+
+    Arguments:
+    width: as integer a size in pixels, as float a fraction of the
+      Default is 50% of
+    height: as integer the height in pixels, as float a fraction of the
+       Default is 75% of
+    startx: if positive, starting position in pixels from the left
+      edge of the screen, if negative from the right edge
+      Default, startx=None is to center window horizontally.
+    starty: if positive, starting position in pixels from the top
+      edge of the screen, if negative from the bottom edge
+      Default, starty=None is to center window vertically.
+
+    Examples:
+    >>> setup (width=200, height=200, startx=0, starty=0)
+
+    sets window to 200x200 pixels, in upper left of screen
+
+    >>> setup(width=.75, height=0.5, startx=None, starty=None)
+
+    sets window to 75% of screen by 50% of screen and centers
+
+>>> help(turtle.pendown)
+Help on function pendown in module turtle:
+
+pendown()
+    Pull the pen down -- drawing when moving.
+
+    Aliases: pendown | pd | down
+
+    No argument.
+
+    Example:
+    >>> pendown()
+
+>>> turtle.setup(400, 400, 0, 0)
+>>> turtle.forward(100)
+>>> turtle.forward(100)
+>>> turtle.right(90)
+>>> turtle.forward(100)
+>>> turtle.right(90)
+>>> turtle.forward(100)
+>>> turtle.reset()
+>>> turtle.width
+<function width at 0x03824A90>
+>>> turtle.width(100)
+>>> turtle.forward(100)
+>>> turtle.width(10)
+>>> turtle.reset()
+>>> turtle.forward(100)
+>>> turtle.width(20)
+>>> turtle.left(110)
+>>> turtle.forward(200)
+>>> turtle.width(10)
+>>> turtle.forward(200)
+>>> turtle.reset()
+>>> turtle.forward(100)
+>>> turtle.left(120)
+>>> turtle.forward(100)
+>>> turtle.left(120)
+>>> turtle.forward(100)
+>>> turtle(reset)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'reset' is not defined
+>>> turtle.reset()
+>>> turtle.forward(100)
+>>> turtle.left(72)
+>>> turtle.forward(100)
+>>> turtle.left(72)
+>>> turtle.forward(100)
+>>> turtle.reset()
+>>> turtle.forward(100)
+>>> turtle.left(72)
+>>> turtle.forward(100)
+>>> turtle.left(72)
+>>> turtle.forward(100)
+>>> turtle.reset()
+>>> turtle.forward(100)
+>>> turtle.left(72)
+>>> turtle.left(72)
+>>> turtle.right(72)
+>>> turtle.forward(100)
+>>> turtle.left(72)
+>>> turtle.forward(100)
+>>> turtle.left(72)
+>>> turtle.forward(100)
+>>> turtle.left(72)
+>>> turtle.forward(100)
+>>> turtle.reset()
+>>> turtle.forward(100)
+>>> turtle.left(60)
+>>> turtle.forward(100)
+>>> turtle.left(60)
+>>> turtle.forward(100)
+>>> turtle.left(60)
+>>> turtle.forward(100)
+>>> turtle.left(60)
+>>> turtle.forward(100)
+>>> turtle.left(60)
+>>> turtle.forward(100)
+>>> turtle.reset()
+>>> turtle.forward(100)
+>>> turtle.left(36)
+>>> turtle.forward(100)
+>>> turtle.left(36)
+>>> turtle.forward(100)
+>>> turtle.left(36)
+>>> turtle.forward(100)
+>>> turtle.left(36)
+>>> turtle.forward(100)
+>>> turtle.left(36)
+>>> turtle.forward(100)
+>>> turtle.left(36)
+>>> turtle.forward(100)
+>>> turtle.left(36)
+>>> turtle.forward(100)
+>>> turtle.left(36)
+>>> turtle.forward(100)
+>>> turtle.left(36)
+>>> turtle.forward(100)
+>>> turtle.reset()
+>>> turtle.shape(circle)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'circle' is not defined
+>>> turtle.shape()
+'classic'
+>>> turtle.shape("circle)
+  File "<stdin>", line 1
+    turtle.shape("circle)
+                        ^
+SyntaxError: EOL while scanning string literal
+>>> turtle.shape("circle")
+>>> turtle.reset()
+>>> turtle.reset()
+>>> turtle.reset()
+>>> turtle.shape("classic"_
+  File "<stdin>", line 1
+    turtle.shape("classic"_
+                          ^
+SyntaxError: invalid syntax
+>>> turtle.shape("classic")
+>>> turtle.circle(100)
+>>> turtle.reset()
+>>> turtle.right(40)
+>>> turtle.forward(100)
+>>> turtle.left(200)
+>>> turtle.right(100)
+>>> turtle.left(40
+... turtle.left(40
+  File "<stdin>", line 2
+    turtle.left(40
+    ^
+SyntaxError: invalid syntax
+>>> turtle.left(40)
+>>> turtle.left(40)
+>>> turtle.right(20)
+>>> turtle.forward(100)
+>>> turtle.right(100)
+>>> turtle.right(10)
+>>> turtle.right(10)
+>>> tutle.forward(100)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'tutle' is not defined
+>>> turtle.forward(100)
+>>> turtle.left(200)
+>>> turtle.right(40)
+>>> turtle.right(20
+... turtle.forward(100)
+  File "<stdin>", line 2
+    turtle.forward(100)
+    ^
+SyntaxError: invalid syntax
+>>> turtle.right(20)
+>>> turtle.forward(100)
+>>> turtle.right(30
+... turtle.right(30
+  File "<stdin>", line 2
+    turtle.right(30
+    ^
+SyntaxError: invalid syntax
+>>> turtle.right(20)
+>>> turtle.forward(100)
+>>> turtle.left(140)
+>>> turtle.right(10)
+>>> turtle.forward(100)
+>>> turtle.right(10)
+>>> turtle.right(10)
+>>> turtle.right(10)
+>>> turtle.right(10)
+>>> turtle.forward(100)
+>>> turtle.left(140
+... turtle.left(140
+  File "<stdin>", line 2
+    turtle.left(140
+    ^
+SyntaxError: invalid syntax
+>>> turtle.left(140)
+>>> turtle.left(10)
+>>> turtle.forward(100)
+>>> turtle.right(10)
+>>> turtle.right(100)
+>>> turtle.right(10)
+>>> turtle.forward(100)
+>>> turtle.left(140)
+>>> turtle.left(140)
+>>> turtle.right(100)
+>>> turtle.right(10)
+>>> turtle.right(10)
+>>> turtle.right(10)
+>>> turtle.forward(100)
+>>> turtle.reset()
+>>> turtle.forward(100)
+>>> turtle.left(90)
+>>> turtle.forward(100)
+>>> turtle.left(90)
+>>> turtle.forward(100)
+>>> turtle.left(90)
+>>> turtle.forward(100)
+>>> turtle.pendown
+<function pendown at 0x03824100>
+>>> turtle.forward(100)
+>>> turtle.(reset)
+  File "<stdin>", line 1
+    turtle.(reset)
+           ^
+SyntaxError: invalid syntax
+>>> turtle.reset()
+>>> turtle.forward(100)
+>>> turtle.left(90)
+>>> turtle.forward(100)
+>>> turtle.left(90)
+>>> turtle.forward(100)
+>>> turtle.left(90)
+>>> turtle.forward(100)
+>>> turtle.penup()
+>>> turtle.forward(100)
+>>> turtle.pendown()
+>>> turtle.forward(100)
+>>> turtle.left(90)
+>>> turtle.forward(100)
+>>> turtle.left(90)
+>>> turtle.forward(100)
+>>> turtle.left(90)
+>>> turtle.forward(100)
+>>> turtle.penup()
+>>> turtle.forward(100)
+>>> turtle.pendown()
+>>> turtle.forward(100)
+>>> turtle.left(90)
+>>> turtle.forward(100)
+>>> turtle.left(90)
+>>> turtle.forward(100)
+>>> turtle.left(90)
+>>> turtle.forward(100)
+>>> turtle.reset()
+>>> turtle.color("green")
+>>> turtle.forward(100)
+>>> turtle.left(90)'
+  File "<stdin>", line 1
+    turtle.left(90)'
+                   ^
+SyntaxError: EOL while scanning string literal
+>>> turtle.left(90)'
+  File "<stdin>", line 1
+    turtle.left(90)'
+                   ^
+SyntaxError: EOL while scanning string literal
+>>> turtle.left(90)
+>>> turtle.forward(100)
+>>> turtle.left(90)
+>>> turtle.forward(100)
+>>> turtle.left(90)
+>>> turtle.forward(100)
+>>> turtle.color("#7678cd")
+>>> turtle.forward(100)
+>>> turtle.left(90)
+>>> turtle.color("#5e5866")
+>>> turtle.forward(100)
+>>> turtle.left(90)
+>>> turtle.forward(100)
+>>> turtle.reset()
+>>> turtle.getscreen()
+<turtle._Screen object at 0x038335C8>
+>>> venster = turtle.getscreen()
+>>> venster.bgcolor("red
+  File "<stdin>", line 1
+    venster.bgcolor("red
+                       ^
+SyntaxError: EOL while scanning string literal
+>>> venster.bgcolor("red")
+>>> venster.bgcolor("darkred")
+>>> turtle.reset()
+>>> turtle.bgcolor("black")
+>>> turtle.pencolor("#FFFFFF")
+>>> turtle.fillcolor("#FF0000")
+>>> turtle.begin_fill()
+>>> turtle.forward(100)
+>>> turtle.right(120)
+>>> turtle.forward(100)
+>>> turtle.right(120)
+>>> turtle.forward(100)
+>>> turtle.end_Fill()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: module 'turtle' has no attribute 'end_Fill'
+>>> turtle.end_fill()
+>>> turtle.reset()
+>>> turtle.bgcolor("white")
+>>>
